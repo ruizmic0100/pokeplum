@@ -289,10 +289,10 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
     [MOVE_VINE_WHIP] =
     {
         .effect = EFFECT_HIT,
-        .power = 35,
+        .power = 45,
         .type = TYPE_GRASS,
         .accuracy = 100,
-        .pp = 10,
+        .pp = 15,
         .secondaryEffectChance = 0,
         .target = MOVE_TARGET_SELECTED,
         .priority = 0,
@@ -471,9 +471,9 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
     [MOVE_TAKE_DOWN] =
     {
         .effect = EFFECT_RECOIL,
-        .power = 90,
+        .power = 100,
         .type = TYPE_NORMAL,
-        .accuracy = 85,
+        .accuracy = 80,
         .pp = 20,
         .secondaryEffectChance = 0,
         .target = MOVE_TARGET_SELECTED,
@@ -1290,7 +1290,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
     [MOVE_RAGE] =
     {
         .effect = EFFECT_RAGE,
-        .power = 20,
+        .power = 40,
         .type = TYPE_NORMAL,
         .accuracy = 100,
         .pp = 20,

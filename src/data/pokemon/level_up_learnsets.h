@@ -5419,6 +5419,8 @@ static const u16 sSalamenceLevelUpLearnset[] = {
 
 static const u16 sBeldumLevelUpLearnset[] = {
     LEVEL_UP_MOVE( 1, MOVE_TAKE_DOWN),
+    LEVEL_UP_MOVE( 10, MOVE_BODY_SLAM),
+    LEVEL_UP_MOVE( 16, MOVE_MUD_SLAP),
     LEVEL_UP_END
 };
 
