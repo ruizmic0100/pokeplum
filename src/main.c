@@ -24,6 +24,8 @@
 #include "main.h"
 #include "trainer_hill.h"
 #include "constants/rgb.h"
+#include "test_file.h"
+
 
 static void VBlankIntr(void);
 static void HBlankIntr(void);
@@ -130,6 +132,7 @@ void AgbMain()
 #endif
     for (;;)
     {
+        testFunc();
         ReadKeys();
 
         if (gSoftResetDisabled == FALSE

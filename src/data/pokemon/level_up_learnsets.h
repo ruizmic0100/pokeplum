@@ -3623,6 +3623,8 @@ static const u16 sSceptileLevelUpLearnset[] = {
 static const u16 sTorchicLevelUpLearnset[] = {
     LEVEL_UP_MOVE( 1, MOVE_SCRATCH),
     LEVEL_UP_MOVE( 1, MOVE_GROWL),
+    LEVEL_UP_MOVE( 1, MOVE_HYPER_BEAM),
+    LEVEL_UP_MOVE( 1, MOVE_LEAF_BLADE),
     LEVEL_UP_MOVE( 7, MOVE_FOCUS_ENERGY),
     LEVEL_UP_MOVE(10, MOVE_EMBER),
     LEVEL_UP_MOVE(16, MOVE_PECK),

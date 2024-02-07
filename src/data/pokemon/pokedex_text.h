@@ -1530,7 +1530,7 @@ const u8 gSceptilePokedexText[] = _(
 
 const u8 gTorchicPokedexText[] = _(
     "If attacked, it strikes back by spitting\n"
-    "balls of fire it forms in its stomach.\n"
+    "bars.\n"
     "A TORCHIC dislikes darkness because it\n"
     "can't see its surroundings.");
 

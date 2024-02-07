@@ -292,13 +292,8 @@ PlayersHouse_1F_Text_IsntItNiceInHere:
 	.string "Isn't it nice in here, too?$"
 
 PlayersHouse_1F_Text_MoversPokemonGoSetClock:
-	.string "The mover's POKéMON do all the work\n"
-	.string "of moving us in and cleaning up after.\l"
-	.string "This is so convenient!\p"
-	.string "{PLAYER}, your room is upstairs.\n"
-	.string "Go check it out, dear!\p"
+	.string "{PLAYER}, your room is upstairs.\p"
 	.string "DAD bought you a new clock to mark\n"
-	.string "our move here.\l"
 	.string "Don't forget to set it!$"
 
 PlayersHouse_1F_Text_ArentYouInterestedInRoom:
@@ -324,10 +319,7 @@ PlayersHouse_1F_Text_ItsOverWeMissedHim:
 	.string "Too bad.$"
 
 PlayersHouse_1F_Text_GoIntroduceYourselfNextDoor:
-	.string "Oh, yes.\n"
-	.string "One of DAD's friends lives in town.\p"
 	.string "PROF. BIRCH is his name.\p"
-	.string "He lives right next door, so you should\n"
 	.string "go over and introduce yourself.$"
 
 PlayersHouse_1F_Text_SeeYouHoney:

@@ -321,13 +321,6 @@ LittlerootTown_MaysHouse_1F_Movement_MayGoUpstairs2:
 	step_end
 
 RivalsHouse_1F_Text_OhYoureTheNewNeighbor:
-	.string "Oh, hello. And you are?\p"
-	.string "… … … … … … … … …\n"
-	.string "… … … … … … … … …\p"
-	.string "Oh, you're {PLAYER}{KUN}, our new next-door\n"
-	.string "neighbor! Hi!\p"
-	.string "We have a {STR_VAR_1} about the same\n"
-	.string "age as you.\p"
 	.string "Our {STR_VAR_1} was excited about making\n"
 	.string "a new friend.\p"
 	.string "Our {STR_VAR_1} is upstairs, I think.$"
@@ -360,22 +353,6 @@ RivalsHouse_1F_Text_ShouldGoHomeEverySoOften:
 	.string "worries about you, {PLAYER}{KUN}.$"
 
 RivalsHouse_1F_Text_MayWhoAreYou:
-	.string "Huh?\n"
-	.string "Who… Who are you?\p"
-	.string "… … … … … … … …\n"
-	.string "… … … … … … … …\p"
-	.string "Oh, you're {PLAYER}{KUN}.\n"
-	.string "So your move was today.\p"
-	.string "Um… I'm MAY.\n"
-	.string "Glad to meet you!\p"
-	.string "I…\n"
-	.string "I have this dream of becoming friends\l"
-	.string "with POKéMON all over the world.\p"
-	.string "I… I heard about you, {PLAYER}{KUN}, from\n"
-	.string "my dad, PROF. BIRCH.\p"
-	.string "I was hoping that you would be nice,\n"
-	.string "{PLAYER}{KUN}, and that we could be friends.\p"
-	.string "Oh, this is silly, isn't it?\n"
 	.string "I… I've just met you, {PLAYER}{KUN}.\p"
 	.string "Eheheh…\p"
 	.string "Oh, no! I forgot!\p"
