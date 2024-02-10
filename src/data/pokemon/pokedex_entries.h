@@ -2232,6 +2232,18 @@ const struct PokedexEntry gPokedexEntries[] =
         .trainerOffset = 0,
     },
 
+    [NATIONAL_DEX_BOSS_SUDOWOODOPRIME] =
+    {
+        .categoryName = _("NEW SPECIES"),
+        .height = 12,
+        .weight = 380,
+        .description = gBoss_SudowoodoPrimePokedexText,
+        .pokemonScale = 305,
+        .pokemonOffset = 8,
+        .trainerScale = 256,
+        .trainerOffset = 0,
+    },
+
     [NATIONAL_DEX_POLITOED] =
     {
         .categoryName = _("FROG"),
@@ -4643,4 +4655,5 @@ const struct PokedexEntry gPokedexEntries[] =
         .trainerScale = 290,
         .trainerOffset = 2,
     },
+
 };

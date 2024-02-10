@@ -2712,6 +2712,13 @@ const u32 gMonShinyPalette_Chimecho[] = INCBIN_U32("graphics/pokemon/chimecho/sh
 const u8 gMonIcon_Chimecho[] = INCBIN_U8("graphics/pokemon/chimecho/icon.4bpp");
 const u8 gMonFootprint_Chimecho[] = INCBIN_U8("graphics/pokemon/chimecho/footprint.1bpp");
 
+const u32 gMonStillFrontPic_Boss_SudowoodoPrime[] = INCBIN_U32("graphics/pokemon/boss_sudowoodoprime/front.4bpp.lz");
+const u32 gMonPalette_Boss_SudowoodoPrime[] = INCBIN_U32("graphics/pokemon/boss_sudowoodoprime/normal.gbapal.lz");
+const u32 gMonBackPic_Boss_SudowoodoPrime[] = INCBIN_U32("graphics/pokemon/boss_sudowoodoprime/back.4bpp.lz");
+const u32 gMonShinyPalette_Boss_SudowoodoPrime[] = INCBIN_U32("graphics/pokemon/boss_sudowoodoprime/shiny.gbapal.lz");
+const u8  gMonIcon_Boss_SudowoodoPrime[] = INCBIN_U8("graphics/pokemon/boss_sudowoodoprime/icon.4bpp");
+const u8  gMonFootprint_Boss_SudowoodoPrime[] = INCBIN_U8("graphics/pokemon/boss_sudowoodoprime/footprint.1bpp");
+
 const u32 gMonStillFrontPic_Egg[] = INCBIN_U32("graphics/pokemon/egg/front.4bpp.lz");
 const u32 gMonPalette_Egg[] = INCBIN_U32("graphics/pokemon/egg/normal.gbapal.lz");
 

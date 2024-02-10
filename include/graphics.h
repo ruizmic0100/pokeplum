@@ -2740,6 +2740,17 @@ extern const u32 gMonShinyPalette_Chimecho[];
 extern const u32 gMonStillFrontPic_Chimecho[];
 extern const u8 gMonIcon_Chimecho[];
 extern const u8 gMonFootprint_Chimecho[];
+// Boss Sudowoodo Prime
+extern const u32 gMonFrontPic_Boss_SudowoodoPrime[];
+extern const u32 gMonPalette_Boss_SudowoodoPrime[];
+extern const u32 gMonBackPic_Boss_SudowoodoPrime[];
+extern const u32 gMonShinyPalette_Boss_SudowoodoPrime[];
+extern const u32 gMonStillFrontPic_Boss_SudowoodoPrime[];
+extern const u8  gMonIcon_Boss_SudowoodoPrime[];
+extern const u8  gMonFootprint_Boss_SudowoodoPrime[];
+
+
+
 extern const u32 gMonPic_Egg[];
 extern const u32 gMonPalette_Egg[];
 extern const u32 gMonFrontPic_Egg[];

@@ -5617,3 +5617,15 @@ static const u16 sChimechoLevelUpLearnset[] = {
     LEVEL_UP_MOVE(46, MOVE_PSYCHIC),
     LEVEL_UP_END
 };
+
+static const u16 sBoss_SudowoodoPrimeLevelUpLearnset[] = {
+    LEVEL_UP_MOVE( 1, MOVE_ROCK_THROW),
+    LEVEL_UP_MOVE( 1, MOVE_MIMIC),
+    LEVEL_UP_MOVE( 9, MOVE_FLAIL),
+    LEVEL_UP_MOVE(17, MOVE_LOW_KICK),
+    LEVEL_UP_MOVE(25, MOVE_ROCK_SLIDE),
+    LEVEL_UP_MOVE(33, MOVE_BLOCK),
+    LEVEL_UP_MOVE(41, MOVE_FAINT_ATTACK),
+    LEVEL_UP_MOVE(57, MOVE_DOUBLE_EDGE),
+    LEVEL_UP_END
+};

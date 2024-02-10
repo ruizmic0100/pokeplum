@@ -2319,3 +2319,11 @@ const u8 gDeoxysPokedexText[] = _(
     "extraterrestrial virus exposed to a laser\n"
     "beam. Its body is configured for superior\n"
     "agility and speed.");
+
+const u8 gBoss_SudowoodoPrimePokedexText[] = _(
+    "The venerable guardian of the ancient groves.\n"
+    "This seasoned POKéMON stands tall\n"
+    "With a trunk weathered by time\n"
+    "and leaves that have witnessed\n"
+    "countless battles."
+);

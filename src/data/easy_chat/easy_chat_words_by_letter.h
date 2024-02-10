@@ -1621,6 +1621,7 @@ const u16 gEasyChatWordsByLetter_S[] = {
     EC_WORD_SYNCHRONIZE,
     EC_MOVE(SYNTHESIS),
     EC_WORD_SYSTEM,
+    EC_POKEMON_NATIONAL(BOSS_SUDOWOODOPRIME),
 };
 
 const u16 gEasyChatWordsByLetter_T[] = {
