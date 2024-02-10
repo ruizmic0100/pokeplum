@@ -3890,7 +3890,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
     [MOVE_BLAZE_KICK] =
     {
         .effect = EFFECT_BLAZE_KICK,
-        .power = 85,
+        .power = 90,
         .type = TYPE_FIRE,
         .accuracy = 90,
         .pp = 10,
@@ -3994,9 +3994,9 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
     [MOVE_BLAST_BURN] =
     {
         .effect = EFFECT_RECHARGE,
-        .power = 150,
+        .power = 180,
         .type = TYPE_FIRE,
-        .accuracy = 90,
+        .accuracy = 95,
         .pp = 5,
         .secondaryEffectChance = 0,
         .target = MOVE_TARGET_SELECTED,
@@ -4332,7 +4332,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
     [MOVE_ICICLE_SPEAR] =
     {
         .effect = EFFECT_MULTI_HIT,
-        .power = 10,
+        .power = 25,
         .type = TYPE_ICE,
         .accuracy = 100,
         .pp = 30,
@@ -4475,7 +4475,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
     [MOVE_VOLT_TACKLE] =
     {
         .effect = EFFECT_DOUBLE_EDGE,
-        .power = 120,
+        .power = 150,
         .type = TYPE_ELECTRIC,
         .accuracy = 100,
         .pp = 15,

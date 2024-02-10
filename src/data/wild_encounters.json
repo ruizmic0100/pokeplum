@@ -1899,8 +1899,8 @@
             "mons": [
               {
                 "min_level": 6,
-                "max_level": 6,
-                "species": "SPECIES_WHISMUR"
+                "max_level": 10,
+                "species": "SPECIES_VULPIX"
               },
               {
                 "min_level": 7,
@@ -1910,7 +1910,7 @@
               {
                 "min_level": 6,
                 "max_level": 6,
-                "species": "SPECIES_WHISMUR"
+                "species": "SPECIES_SPINDA"
               },
               {
                 "min_level": 6,
@@ -1919,7 +1919,7 @@
               },
               {
                 "min_level": 7,
-                "max_level": 7,
+                "max_level": 12,
                 "species": "SPECIES_WHISMUR"
               },
               {
@@ -1934,8 +1934,8 @@
               },
               {
                 "min_level": 8,
-                "max_level": 8,
-                "species": "SPECIES_WHISMUR"
+                "max_level": 12,
+                "species": "SPECIES_TEDDIURSA"
               },
               {
                 "min_level": 5,
@@ -1949,8 +1949,8 @@
               },
               {
                 "min_level": 5,
-                "max_level": 5,
-                "species": "SPECIES_WHISMUR"
+                "max_level": 12,
+                "species": "SPECIES_PRIMEAPE"
               },
               {
                 "min_level": 8,
@@ -2836,9 +2836,9 @@
                 "species": "SPECIES_WINGULL"
               },
               {
-                "min_level": 15,
-                "max_level": 25,
-                "species": "SPECIES_WINGULL"
+                "min_level": 7,
+                "max_level": 13,
+                "species": "SPECIES_SQUIRTLE"
               },
               {
                 "min_level": 25,

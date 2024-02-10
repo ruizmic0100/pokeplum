@@ -1267,7 +1267,7 @@ static void Cmd_critcalc(void)
     critChance  = 2 * ((gBattleMons[gBattlerAttacker].status2 & STATUS2_FOCUS_ENERGY) != 0)
                 + (gBattleMoves[gCurrentMove].effect == EFFECT_HIGH_CRITICAL)
                 + (gBattleMoves[gCurrentMove].effect == EFFECT_SKY_ATTACK)
-                + (gBattleMoves[gCurrentMove].effect == EFFECT_BLAZE_KICK)
+                + (gBattleMoves[gCurrentMove].effect == EFFECT_BLAZE_KICK) * 1.2
                 + (gBattleMoves[gCurrentMove].effect == EFFECT_POISON_TAIL)
                 + (holdEffect == HOLD_EFFECT_SCOPE_LENS)
                 + 2 * (holdEffect == HOLD_EFFECT_LUCKY_PUNCH && gBattleMons[gBattlerAttacker].species == SPECIES_CHANSEY)
