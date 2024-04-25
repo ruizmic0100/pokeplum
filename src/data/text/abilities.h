@@ -76,6 +76,9 @@ static const u8 sPurePowerDescription[] = _("Raises ATTACK.");
 static const u8 sShellArmorDescription[] = _("Blocks critical hits.");
 static const u8 sCacophonyDescription[] = _("Avoids sound-based moves.");
 static const u8 sAirLockDescription[] = _("Negates weather effects.");
+static const u8 sGlassCannonDescription[] = _("First attack move is strong.");
+static const u8 sSelfMendDescription[] = _("Restore health every 3 turns.");
+static const u8 sEndlessDarknessDescription[] = _("Dark waves emanate.");
 
 const u8 gAbilityNames[ABILITIES_COUNT][ABILITY_NAME_LENGTH + 1] =
 {
@@ -157,6 +160,9 @@ const u8 gAbilityNames[ABILITIES_COUNT][ABILITY_NAME_LENGTH + 1] =
     [ABILITY_SHELL_ARMOR] = _("SHELL ARMOR"),
     [ABILITY_CACOPHONY] = _("CACOPHONY"),
     [ABILITY_AIR_LOCK] = _("AIR LOCK"),
+    [ABILITY_GLASS_CANNON] = _("GLASS CANNON"),
+    [ABILITY_SELF_MEND] = _("SELF MEND"),
+    [ABILITY_ENDLESS_DARKNESS] = _("ENDLESS DARK"),
 };
 
 const u8 *const gAbilityDescriptionPointers[ABILITIES_COUNT] =
@@ -239,4 +245,7 @@ const u8 *const gAbilityDescriptionPointers[ABILITIES_COUNT] =
     [ABILITY_SHELL_ARMOR] = sShellArmorDescription,
     [ABILITY_CACOPHONY] = sCacophonyDescription,
     [ABILITY_AIR_LOCK] = sAirLockDescription,
+    [ABILITY_GLASS_CANNON] = sGlassCannonDescription,
+    [ABILITY_SELF_MEND] = sSelfMendDescription,
+    [ABILITY_ENDLESS_DARKNESS] = sEndlessDarknessDescription,
 };

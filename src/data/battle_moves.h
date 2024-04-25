@@ -4553,9 +4553,9 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
     [MOVE_ROCK_BLAST] =
     {
         .effect = EFFECT_MULTI_HIT,
-        .power = 25,
+        .power = 30,
         .type = TYPE_ROCK,
-        .accuracy = 80,
+        .accuracy = 90,
         .pp = 10,
         .secondaryEffectChance = 0,
         .target = MOVE_TARGET_SELECTED,

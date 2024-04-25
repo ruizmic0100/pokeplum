@@ -2207,11 +2207,11 @@ Route116_Text_JosePostBattle:
 	.string "So they get strong quickly, too.$"
 
 Route116_Text_JaniceIntro:
-	.string "Let me teach you how strong my\n"
-	.string "adorable POKéMON is!$"
+	.string "FUCK YOU!!!\n"
+	.string "ad hominem bitch!$"
 
 Route116_Text_JaniceDefeat:
-	.string "You're a notch above me…$"
+	.string "You're a little bitch…$"
 
 Route116_Text_JanicePostBattle:
 	.string "POKéMON that possess cuteness and\n"

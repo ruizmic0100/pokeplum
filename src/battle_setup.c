@@ -916,10 +916,23 @@ void ChooseStarter(void)
 static void CB2_GiveStarter(void)
 {
     u16 starterMon;
+    u16 randomAdj = (Random() % (30)) + 1;
+    u16 i = (Random() % (63 - 57)) + 57;
 
     *GetVarPointer(VAR_STARTER_MON) = gSpecialVar_Result;
     starterMon = GetStarterPokemon(gSpecialVar_Result);
     ScriptGiveMon(starterMon, 5, ITEM_NONE, 0, 0, 0);
+
+    // Logic that injects randomized stat increases to your starter.
+    if (i == 57) {
+        randomAdj = randomAdj + GetMonData(&gPlayerParty[0], MON_DATA_MAX_HP);
+        SetMonData(&gPlayerParty[0], MON_DATA_MAX_HP, &randomAdj);
+        randomAdj = randomAdj + GetMonData(&gPlayerParty[0], MON_DATA_HP);
+        SetMonData(&gPlayerParty[0], MON_DATA_HP, &randomAdj);
+    } else {
+        randomAdj = randomAdj + GetMonData(&gPlayerParty[0], i);
+        SetMonData(&gPlayerParty[0], i, &randomAdj);
+    }
     ResetTasks();
     PlayBattleBGM();
     SetMainCallback2(CB2_StartFirstBattle);

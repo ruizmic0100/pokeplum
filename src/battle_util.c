@@ -2562,6 +2562,41 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
                     gSpecialStatuses[battler].traced = 1;
                 }
                 break;
+            case ABILITY_SELF_MEND:
+                if (gBattleMons[battler].hp < gBattleMons[battler].maxHP)
+                {
+                    gBattleMoveDamage = gBattleMons[battler].maxHP / 16;
+                    if (gBattleMoveDamage == 0)
+                        gBattleMoveDamage = 1;
+                    if (gBattleMons[battler].hp + gBattleMoveDamage > gBattleMons[battler].maxHP)
+                        gBattleMoveDamage = gBattleMons[battler].maxHP - gBattleMons[battler].hp;
+                    gBattleMoveDamage *= -1;
+                    BattleScriptExecute(BattleScript_ItemHealHP_End2);
+                    RecordAbilityBattle(battler, ABILITY_SELF_MEND);
+                }
+                break;
+            case ABILITY_GLASS_CANNON:
+                if (gDisableStructs[battler].isFirstTurn == 0)
+                {
+                    gBattleMons[battler].statStages[STAT_ATK]++;
+                    gBattleScripting.animArg1 = STAT_ANIM_PLUS1 + STAT_ATK;
+                    gBattleScripting.animArg2 = 0;
+                    BattleScriptPushCursorAndCallback(BattleScript_SpeedBoostActivates);
+                    gBattleScripting.battler = battler;
+                    effect++;
+                }
+                break;
+            case ABILITY_ENDLESS_DARKNESS:
+                if (gBattleMons[gActiveBattler].hp != 0)
+                {
+                    gBattleMoveDamage = gBattleMons[gActiveBattler].maxHP / 8;
+                    if (gBattleMoveDamage == 0)
+                        gBattleMoveDamage = 1;
+                    BattleScriptExecute(BattleScript_BurnTurnDmg);
+                    effect++;
+                }
+                gBattleStruct->turnEffectsTracker++;
+                break;
             case ABILITY_CLOUD_NINE:
             case ABILITY_AIR_LOCK:
                 {
