@@ -48,6 +48,8 @@
 #include "constants/trainers.h"
 #include "constants/union_room.h"
 
+#include "starter_choose.h"
+
 #define DAY_EVO_HOUR_BEGIN       12
 #define DAY_EVO_HOUR_END         HOURS_PER_DAY
 
@@ -2200,11 +2202,26 @@ void ZeroEnemyPartyMons(void)
 void CreateMon(struct Pokemon *mon, u16 species, u8 level, u8 fixedIV, u8 hasFixedPersonality, u32 fixedPersonality, u8 otIdType, u32 fixedOtId)
 {
     u32 mail;
+    u32 randomAdj = (Random() % (30)) + 1;
+    u16 i = (Random() % (63 - 58)) + 58;
+    DebugPrintf("Inside CreateMon\n");
+    DebugPrintf("randomAdj: %d\n", randomAdj);
+    DebugPrintf("i: %d\n", i);
+    DebugPrintf("Species: %S\n", gSpeciesNames[species]);
+
     ZeroMonData(mon);
     CreateBoxMon(&mon->box, species, level, fixedIV, hasFixedPersonality, fixedPersonality, otIdType, fixedOtId);
     SetMonData(mon, MON_DATA_LEVEL, &level);
     mail = MAIL_NONE;
     SetMonData(mon, MON_DATA_MAIL, &mail);
+
+    // Random injection logic:
+    SetMonData(mon, MON_DATA_RANDBOOST, &randomAdj);
+    SetMonData(mon, MON_DATA_BOOSTEDSTAT, &i);
+
+    DebugPrintf("MON_DATA_RANDBOOST: %d\n", GetMonData(mon, MON_DATA_RANDBOOST, NULL));
+    DebugPrintf("MON_DATA_BOOSTEDSTAT: %d\n", GetMonData(mon, MON_DATA_BOOSTEDSTAT, NULL));
+
     CalculateMonStats(mon);
 }
 
@@ -2822,6 +2839,15 @@ static u16 CalculateBoxMonChecksum(struct BoxPokemon *boxMon)
     s32 n = (((2 * baseStat + iv + ev / 4) * level) / 100) + 5; \
     u8 nature = GetNature(mon);                                 \
     n = ModifyStatByNature(nature, n, statIndex);               \
+    if (field == boostedStat && species == GetStarterPokemon(VarGet(VAR_STARTER_MON))) {                                 \
+        if (field == 59) { DebugPrintf("Added %d to baseline %d for %s stat", randBoost, n, "ATK"); }       \
+        if (field == 60) { DebugPrintf("Added %d to baseline %d for %s stat", randBoost, n, "DEF"); }       \
+        if (field == 61) { DebugPrintf("Added %d to baseline %d for %s stat", randBoost, n, "SPE"); }       \
+        if (field == 62) { DebugPrintf("Added %d to baseline %d for %s stat", randBoost, n, "SpAtk"); }       \
+        if (field == 63) { DebugPrintf("Added %d to baseline %d for %s stat", randBoost, n, "SpDef"); }       \
+        n = n + randBoost;                                      \
+        SetMonData(mon, field, &n);                             \
+    }                                                           \
     SetMonData(mon, field, &n);                                 \
 }
 
@@ -2844,6 +2870,11 @@ void CalculateMonStats(struct Pokemon *mon)
     u16 species = GetMonData(mon, MON_DATA_SPECIES, NULL);
     s32 level = GetLevelFromMonExp(mon);
     s32 newMaxHP;
+    s32 randBoost = GetMonData(mon, MON_DATA_RANDBOOST, NULL);
+    s32 boostedStat = GetMonData(mon, MON_DATA_BOOSTEDSTAT, NULL);
+
+    DebugPrintf("randBoostInCalc: %d\n", randBoost);
+    DebugPrintf("boostedStatInCalc: %d\n", boostedStat);
 
     SetMonData(mon, MON_DATA_LEVEL, &level);
 
@@ -2853,8 +2884,13 @@ void CalculateMonStats(struct Pokemon *mon)
     }
     else
     {
-        s32 n = 2 * gSpeciesInfo[species].baseHP + hpIV;
-        newMaxHP = (((n + hpEV / 4) * level) / 100) + level + 10;
+        if (boostedStat != 58 || species != GetStarterPokemon(VarGet(VAR_STARTER_MON))) {
+            s32 n = 2 * gSpeciesInfo[species].baseHP + hpIV;
+            newMaxHP = (((n + hpEV / 4) * level) / 100) + level + 10;
+        } else {
+            s32 n = 2 * gSpeciesInfo[species].baseHP + hpIV;
+            newMaxHP = (((n + hpEV / 4) * level) / 100) + level + 10 + randBoost;
+        }
     }
 
     gBattleScripting.levelUpHP = newMaxHP - oldMaxHP;
@@ -2862,12 +2898,19 @@ void CalculateMonStats(struct Pokemon *mon)
         gBattleScripting.levelUpHP = 1;
 
     SetMonData(mon, MON_DATA_MAX_HP, &newMaxHP);
+    DebugPrintf("newMax HP: %d\n", newMaxHP);
 
     CALC_STAT(baseAttack, attackIV, attackEV, STAT_ATK, MON_DATA_ATK)
     CALC_STAT(baseDefense, defenseIV, defenseEV, STAT_DEF, MON_DATA_DEF)
     CALC_STAT(baseSpeed, speedIV, speedEV, STAT_SPEED, MON_DATA_SPEED)
     CALC_STAT(baseSpAttack, spAttackIV, spAttackEV, STAT_SPATK, MON_DATA_SPATK)
     CALC_STAT(baseSpDefense, spDefenseIV, spDefenseEV, STAT_SPDEF, MON_DATA_SPDEF)
+
+    DebugPrintf("baseAttack: %d\n", GetMonData(mon, 59, NULL));
+    DebugPrintf("baseDefense: %d\n", GetMonData(mon, 60, NULL));
+    DebugPrintf("baseSpeed: %d\n", GetMonData(mon, 61, NULL));
+    DebugPrintf("baseSpAttack: %d\n", GetMonData(mon, 62, NULL));
+    DebugPrintf("baseSpDefense: %d\n", GetMonData(mon, 63, NULL));
 
     if (species == SPECIES_SHEDINJA)
     {
@@ -2893,6 +2936,8 @@ void CalculateMonStats(struct Pokemon *mon)
     }
 
     SetMonData(mon, MON_DATA_HP, &currentHP);
+    DebugPrintf("currentHP: %d\n", currentHP);
+    DebugPrintf("\n\n----------------------\n\n");
 }
 
 void BoxMonToMon(const struct BoxPokemon *src, struct Pokemon *dest)
@@ -3116,6 +3161,8 @@ s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *de
     u8 attackerHoldEffect;
     u8 attackerHoldEffectParam;
 
+    DebugPrintf("Inside CalculateBaseDamage\n");
+
     if (!powerOverride)
         gBattleMovePower = gBattleMoves[move].power;
     else
@@ -3173,9 +3220,7 @@ s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *de
         if (attackerHoldEffect == sHoldEffectToType[i][0]
             && type == sHoldEffectToType[i][1])
         {
-            if (IS_TYPE_PHYSICAL(type))
                 attack = (attack * (attackerHoldEffectParam + 100)) / 100;
-            else
                 spAttack = (spAttack * (attackerHoldEffectParam + 100)) / 100;
             break;
         }
@@ -3201,7 +3246,7 @@ s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *de
 
     // Apply abilities / field sports
     if (defender->ability == ABILITY_THICK_FAT && (type == TYPE_FIRE || type == TYPE_ICE))
-        spAttack /= 2;
+        gBattleMovePower /= 2;
     if (attacker->ability == ABILITY_HUSTLE)
         attack = (150 * attack) / 100;
     if (attacker->ability == ABILITY_PLUS && ABILITY_ON_FIELD2(ABILITY_MINUS))
@@ -3229,7 +3274,7 @@ s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *de
     if (gBattleMoves[gCurrentMove].effect == EFFECT_EXPLOSION)
         defense /= 2;
 
-    if (IS_TYPE_PHYSICAL(type))
+    if (IS_MOVE_PHYSICAL(gCurrentMove))
     {
         if (gCritMultiplier == 2)
         {
@@ -3284,7 +3329,7 @@ s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *de
     if (type == TYPE_MYSTERY)
         damage = 0; // is ??? type. does 0 damage.
 
-    if (IS_TYPE_SPECIAL(type))
+    if (IS_MOVE_SPECIAL(gCurrentMove))
     {
         if (gCritMultiplier == 2)
         {
@@ -3327,46 +3372,48 @@ s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *de
         if ((gBattleTypeFlags & BATTLE_TYPE_DOUBLE) && gBattleMoves[move].target == MOVE_TARGET_BOTH && CountAliveMonsInBattle(BATTLE_ALIVE_DEF_SIDE) == 2)
             damage /= 2;
 
-        // Are effects of weather negated with cloud nine or air lock
-        if (WEATHER_HAS_EFFECT2)
+        // Any weather except sun weakens solar beam
+        if ((gBattleWeather & (B_WEATHER_RAIN | B_WEATHER_SANDSTORM | B_WEATHER_HAIL)) && gCurrentMove == MOVE_SOLAR_BEAM)
+            damage /= 2;
+
+    }
+
+    // Are effects of weather negated with cloud nine or air lock
+    if (WEATHER_HAS_EFFECT2)
+    {
+        // Rain weakens Fire, boosts Water
+        if (gBattleWeather & B_WEATHER_RAIN_TEMPORARY)
         {
-            // Rain weakens Fire, boosts Water
-            if (gBattleWeather & B_WEATHER_RAIN_TEMPORARY)
+            switch (type)
             {
-                switch (type)
-                {
-                case TYPE_FIRE:
-                    damage /= 2;
-                    break;
-                case TYPE_WATER:
-                    damage = (15 * damage) / 10;
-                    break;
-                }
-            }
-
-            // Any weather except sun weakens solar beam
-            if ((gBattleWeather & (B_WEATHER_RAIN | B_WEATHER_SANDSTORM | B_WEATHER_HAIL)) && gCurrentMove == MOVE_SOLAR_BEAM)
+            case TYPE_FIRE:
                 damage /= 2;
-
-            // Sun boosts Fire, weakens Water
-            if (gBattleWeather & B_WEATHER_SUN)
-            {
-                switch (type)
-                {
-                case TYPE_FIRE:
-                    damage = (15 * damage) / 10;
-                    break;
-                case TYPE_WATER:
-                    damage /= 2;
-                    break;
-                }
+                break;
+            case TYPE_WATER:
+                damage = (15 * damage) / 10;
+                break;
             }
         }
 
-        // Flash fire triggered
-        if ((gBattleResources->flags->flags[battlerIdAtk] & RESOURCE_FLAG_FLASH_FIRE) && type == TYPE_FIRE)
-            damage = (15 * damage) / 10;
+
+        // Sun boosts Fire, weakens Water
+        if (gBattleWeather & B_WEATHER_SUN)
+        {
+            switch (type)
+            {
+            case TYPE_FIRE:
+                damage = (15 * damage) / 10;
+                break;
+            case TYPE_WATER:
+                damage /= 2;
+                break;
+            }
+        }
     }
+
+    // Flash fire triggered
+    if ((gBattleResources->flags->flags[battlerIdAtk] & RESOURCE_FLAG_FLASH_FIRE) && type == TYPE_FIRE)
+        damage = (15 * damage) / 10;
 
     return damage + 2;
 }
@@ -3699,6 +3746,12 @@ u32 GetMonData3(struct Pokemon *mon, s32 field, u8 *data)
         break;
     case MON_DATA_MAIL:
         ret = mon->mail;
+        break;
+    case MON_DATA_BOOSTEDSTAT:
+        ret = mon->boostedStat;
+        break;
+    case MON_DATA_RANDBOOST:
+        ret = mon->randBoost;
         break;
     default:
         ret = GetBoxMonData(&mon->box, field, data);
@@ -4110,6 +4163,12 @@ void SetMonData(struct Pokemon *mon, s32 field, const void *dataArg)
         break;
     case MON_DATA_MAIL:
         SET8(mon->mail);
+        break;
+    case MON_DATA_RANDBOOST:
+        SET16(mon->randBoost);
+        break;
+    case MON_DATA_BOOSTEDSTAT:
+        SET8(mon->boostedStat);
         break;
     case MON_DATA_SPECIES_OR_EGG:
         break;

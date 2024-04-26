@@ -7,16 +7,16 @@
         {
           "type": "land_mons",
           "encounter_rates": [
-            12,
+            8,
             10,
             10,
-            2,
+            6,
             16,
             10,
             5,
-            5,
+            15,
             4,
-            20,
+            10,
             1,
             5
           ]
@@ -327,7 +327,7 @@
             "mons": [
               {
                 "min_level": 2,
-                "max_level": 2,
+                "max_level": 6,
                 "species": "SPECIES_ABRA"
               },
               {
@@ -381,9 +381,9 @@
                 "species": "SPECIES_WINGULL"
               },
               {
-                "min_level": 4,
-                "max_level": 4,
-                "species": "SPECIES_WINGULL"
+                "min_level": 8,
+                "max_level": 20,
+                "species": "SPECIES_GROWLITHE"
               }
             ]
           },

@@ -79,7 +79,7 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_PROF_BIRCH",
-      "x": 5,
+      "x": 6,
       "y": 11,
       "elevation": 3,
       "movement_type": "MOVEMENT_TYPE_LOOK_AROUND",
@@ -146,7 +146,7 @@
     },
     {
       "type": "trigger",
-      "x": 8,
+      "x": 7,
       "y": 16,
       "elevation": 3,
       "var": "VAR_ROUTE101_STATE",
@@ -155,7 +155,7 @@
     },
     {
       "type": "trigger",
-      "x": 8,
+      "x": 7,
       "y": 15,
       "elevation": 3,
       "var": "VAR_ROUTE101_STATE",
@@ -173,7 +173,7 @@
     },
     {
       "type": "trigger",
-      "x": 8,
+      "x": 7,
       "y": 17,
       "elevation": 3,
       "var": "VAR_ROUTE101_STATE",

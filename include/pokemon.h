@@ -3,6 +3,10 @@
 
 #include "sprite.h"
 
+#define MOVE_CATEGORY_PHYSICAL 0
+#define MOVE_CATEGORY_SPECIAL 1
+#define MOVE_CATEGORY_STATUS 2
+
 // Property labels for Get(Box)MonData / Set(Box)MonData
 enum {
     MON_DATA_PERSONALITY,
@@ -94,6 +98,8 @@ enum {
     MON_DATA_SPEED2,
     MON_DATA_SPATK2,
     MON_DATA_SPDEF2,
+    MON_DATA_RANDBOOST,
+    MON_DATA_BOOSTEDSTAT
 };
 
 struct PokemonSubstruct0
@@ -229,6 +235,8 @@ struct Pokemon
     u16 speed;
     u16 spAttack;
     u16 spDefense;
+    u16 randBoost;
+    u8 boostedStat; // 58-63 for base stats.
 };
 
 struct MonSpritesGfxManager
@@ -336,6 +344,7 @@ struct BattleMove
     u8 target;
     s8 priority;
     u8 flags;
+    u8 category;
 };
 
 #define SPINDA_SPOT_WIDTH 16
@@ -544,6 +553,5 @@ bool8 HasTwoFramesAnimation(u16 species);
 struct MonSpritesGfxManager *CreateMonSpritesGfxManager(u8 managerId, u8 mode);
 void DestroyMonSpritesGfxManager(u8 managerId);
 u8 *MonSpritesGfxManager_GetSpritePtr(u8 managerId, u8 spriteNum);
-void SetStarterStats(void);
 
 #endif // GUARD_POKEMON_H
