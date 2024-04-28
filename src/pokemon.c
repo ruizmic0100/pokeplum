@@ -2202,12 +2202,6 @@ void ZeroEnemyPartyMons(void)
 void CreateMon(struct Pokemon *mon, u16 species, u8 level, u8 fixedIV, u8 hasFixedPersonality, u32 fixedPersonality, u8 otIdType, u32 fixedOtId)
 {
     u32 mail;
-    u32 randomAdj = (Random() % (30)) + 1;
-    u16 i = (Random() % (63 - 58)) + 58;
-    DebugPrintf("Inside CreateMon\n");
-    DebugPrintf("randomAdj: %d\n", randomAdj);
-    DebugPrintf("i: %d\n", i);
-    DebugPrintf("Species: %S\n", gSpeciesNames[species]);
 
     ZeroMonData(mon);
     CreateBoxMon(&mon->box, species, level, fixedIV, hasFixedPersonality, fixedPersonality, otIdType, fixedOtId);
@@ -2215,12 +2209,6 @@ void CreateMon(struct Pokemon *mon, u16 species, u8 level, u8 fixedIV, u8 hasFix
     mail = MAIL_NONE;
     SetMonData(mon, MON_DATA_MAIL, &mail);
 
-    // Random injection logic:
-    SetMonData(mon, MON_DATA_RANDBOOST, &randomAdj);
-    SetMonData(mon, MON_DATA_BOOSTEDSTAT, &i);
-
-    DebugPrintf("MON_DATA_RANDBOOST: %d\n", GetMonData(mon, MON_DATA_RANDBOOST, NULL));
-    DebugPrintf("MON_DATA_BOOSTEDSTAT: %d\n", GetMonData(mon, MON_DATA_BOOSTEDSTAT, NULL));
 
     CalculateMonStats(mon);
 }
@@ -2839,15 +2827,6 @@ static u16 CalculateBoxMonChecksum(struct BoxPokemon *boxMon)
     s32 n = (((2 * baseStat + iv + ev / 4) * level) / 100) + 5; \
     u8 nature = GetNature(mon);                                 \
     n = ModifyStatByNature(nature, n, statIndex);               \
-    if (field == boostedStat && species == GetStarterPokemon(VarGet(VAR_STARTER_MON))) {                                 \
-        if (field == 59) { DebugPrintf("Added %d to baseline %d for %s stat", randBoost, n, "ATK"); }       \
-        if (field == 60) { DebugPrintf("Added %d to baseline %d for %s stat", randBoost, n, "DEF"); }       \
-        if (field == 61) { DebugPrintf("Added %d to baseline %d for %s stat", randBoost, n, "SPE"); }       \
-        if (field == 62) { DebugPrintf("Added %d to baseline %d for %s stat", randBoost, n, "SpAtk"); }       \
-        if (field == 63) { DebugPrintf("Added %d to baseline %d for %s stat", randBoost, n, "SpDef"); }       \
-        n = n + randBoost;                                      \
-        SetMonData(mon, field, &n);                             \
-    }                                                           \
     SetMonData(mon, field, &n);                                 \
 }
 
@@ -2870,11 +2849,7 @@ void CalculateMonStats(struct Pokemon *mon)
     u16 species = GetMonData(mon, MON_DATA_SPECIES, NULL);
     s32 level = GetLevelFromMonExp(mon);
     s32 newMaxHP;
-    s32 randBoost = GetMonData(mon, MON_DATA_RANDBOOST, NULL);
-    s32 boostedStat = GetMonData(mon, MON_DATA_BOOSTEDSTAT, NULL);
 
-    DebugPrintf("randBoostInCalc: %d\n", randBoost);
-    DebugPrintf("boostedStatInCalc: %d\n", boostedStat);
 
     SetMonData(mon, MON_DATA_LEVEL, &level);
 
@@ -2884,13 +2859,8 @@ void CalculateMonStats(struct Pokemon *mon)
     }
     else
     {
-        if (boostedStat != 58 || species != GetStarterPokemon(VarGet(VAR_STARTER_MON))) {
             s32 n = 2 * gSpeciesInfo[species].baseHP + hpIV;
             newMaxHP = (((n + hpEV / 4) * level) / 100) + level + 10;
-        } else {
-            s32 n = 2 * gSpeciesInfo[species].baseHP + hpIV;
-            newMaxHP = (((n + hpEV / 4) * level) / 100) + level + 10 + randBoost;
-        }
     }
 
     gBattleScripting.levelUpHP = newMaxHP - oldMaxHP;
@@ -2898,7 +2868,6 @@ void CalculateMonStats(struct Pokemon *mon)
         gBattleScripting.levelUpHP = 1;
 
     SetMonData(mon, MON_DATA_MAX_HP, &newMaxHP);
-    DebugPrintf("newMax HP: %d\n", newMaxHP);
 
     CALC_STAT(baseAttack, attackIV, attackEV, STAT_ATK, MON_DATA_ATK)
     CALC_STAT(baseDefense, defenseIV, defenseEV, STAT_DEF, MON_DATA_DEF)
@@ -2906,11 +2875,6 @@ void CalculateMonStats(struct Pokemon *mon)
     CALC_STAT(baseSpAttack, spAttackIV, spAttackEV, STAT_SPATK, MON_DATA_SPATK)
     CALC_STAT(baseSpDefense, spDefenseIV, spDefenseEV, STAT_SPDEF, MON_DATA_SPDEF)
 
-    DebugPrintf("baseAttack: %d\n", GetMonData(mon, 59, NULL));
-    DebugPrintf("baseDefense: %d\n", GetMonData(mon, 60, NULL));
-    DebugPrintf("baseSpeed: %d\n", GetMonData(mon, 61, NULL));
-    DebugPrintf("baseSpAttack: %d\n", GetMonData(mon, 62, NULL));
-    DebugPrintf("baseSpDefense: %d\n", GetMonData(mon, 63, NULL));
 
     if (species == SPECIES_SHEDINJA)
     {
@@ -2936,8 +2900,6 @@ void CalculateMonStats(struct Pokemon *mon)
     }
 
     SetMonData(mon, MON_DATA_HP, &currentHP);
-    DebugPrintf("currentHP: %d\n", currentHP);
-    DebugPrintf("\n\n----------------------\n\n");
 }
 
 void BoxMonToMon(const struct BoxPokemon *src, struct Pokemon *dest)
@@ -3747,12 +3709,6 @@ u32 GetMonData3(struct Pokemon *mon, s32 field, u8 *data)
     case MON_DATA_MAIL:
         ret = mon->mail;
         break;
-    case MON_DATA_BOOSTEDSTAT:
-        ret = mon->boostedStat;
-        break;
-    case MON_DATA_RANDBOOST:
-        ret = mon->randBoost;
-        break;
     default:
         ret = GetBoxMonData(&mon->box, field, data);
         break;
@@ -4163,12 +4119,6 @@ void SetMonData(struct Pokemon *mon, s32 field, const void *dataArg)
         break;
     case MON_DATA_MAIL:
         SET8(mon->mail);
-        break;
-    case MON_DATA_RANDBOOST:
-        SET16(mon->randBoost);
-        break;
-    case MON_DATA_BOOSTEDSTAT:
-        SET8(mon->boostedStat);
         break;
     case MON_DATA_SPECIES_OR_EGG:
         break;

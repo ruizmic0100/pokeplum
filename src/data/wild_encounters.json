@@ -7,16 +7,16 @@
         {
           "type": "land_mons",
           "encounter_rates": [
+            6,
             8,
-            10,
-            10,
+            8,
             6,
             16,
             10,
             5,
             15,
             4,
-            10,
+            16,
             1,
             5
           ]
@@ -144,7 +144,7 @@
               },
               {
                 "min_level": 5,
-                "max_level": 7,
+                "max_level": 9,
                 "species": "SPECIES_SCYTHER"
               }
             ]
@@ -168,12 +168,12 @@
               },
               {
                 "min_level": 4,
-                "max_level": 4,
+                "max_level": 5,
                 "species": "SPECIES_POOCHYENA"
               },
               {
                 "min_level": 4,
-                "max_level": 4,
+                "max_level": 6,
                 "species": "SPECIES_WURMPLE"
               },
               {
@@ -183,7 +183,7 @@
               },
               {
                 "min_level": 4,
-                "max_level": 8,
+                "max_level": 9,
                 "species": "SPECIES_LOTAD"
               },
               {
@@ -198,7 +198,7 @@
               },
               {
                 "min_level": 4,
-                "max_level": 4,
+                "max_level": 5,
                 "species": "SPECIES_ZIGZAGOON"
               },
               {
@@ -213,7 +213,7 @@
               },
               {
                 "min_level": 3,
-                "max_level": 6,
+                "max_level": 7,
                 "species": "SPECIES_SEEDOT"
               }
             ]
@@ -332,7 +332,7 @@
               },
               {
                 "min_level": 3,
-                "max_level": 3,
+                "max_level": 8,
                 "species": "SPECIES_BELLSPROUT"
               },
               {
@@ -347,7 +347,7 @@
               },
               {
                 "min_level": 2,
-                "max_level": 10,
+                "max_level": 5,
                 "species": "SPECIES_WINGULL"
               },
               {
@@ -362,7 +362,7 @@
               },
               {
                 "min_level": 4,
-                "max_level": 12,
+                "max_level": 6,
                 "species": "SPECIES_ZIGZAGOON"
               },
               {
@@ -372,12 +372,12 @@
               },
               {
                 "min_level": 3,
-                "max_level": 5,
+                "max_level": 7,
                 "species": "SPECIES_WINGULL"
               },
               {
                 "min_level": 5,
-                "max_level": 8,
+                "max_level": 5,
                 "species": "SPECIES_WINGULL"
               },
               {
@@ -501,7 +501,7 @@
               },
               {
                 "min_level": 7,
-                "max_level": 10,
+                "max_level": 12,
                 "species": "SPECIES_BAGON"
               },
               {
@@ -516,7 +516,7 @@
               },
               {
                 "min_level": 4,
-                "max_level": 8,
+                "max_level": 11,
                 "species": "SPECIES_MARILL"
               },
               {
@@ -526,12 +526,12 @@
               },
               {
                 "min_level": 4,
-                "max_level": 10,
+                "max_level": 11,
                 "species": "SPECIES_TAILLOW"
               },
               {
                 "min_level": 5,
-                "max_level": 5,
+                "max_level": 7,
                 "species": "SPECIES_TAILLOW"
               },
               {
@@ -541,7 +541,7 @@
               },
               {
                 "min_level": 4,
-                "max_level": 10,
+                "max_level": 12,
                 "species": "SPECIES_BELDUM"
               },
               {

@@ -98,8 +98,12 @@ enum {
     MON_DATA_SPEED2,
     MON_DATA_SPATK2,
     MON_DATA_SPDEF2,
-    MON_DATA_RANDBOOST,
-    MON_DATA_BOOSTEDSTAT
+    // MON_DATA_RANDBOOST1,
+    // MON_DATA_RANDBOOST2,
+    // MON_DATA_RANDBOOST3,
+    // MON_DATA_BOOSTEDSTAT1,
+    // MON_DATA_BOOSTEDSTAT2,
+    // MON_DATA_BOOSTEDSTAT3
 };
 
 struct PokemonSubstruct0
@@ -235,8 +239,6 @@ struct Pokemon
     u16 speed;
     u16 spAttack;
     u16 spDefense;
-    u16 randBoost;
-    u8 boostedStat; // 58-63 for base stats.
 };
 
 struct MonSpritesGfxManager
