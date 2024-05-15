@@ -3123,8 +3123,6 @@ s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *de
     u8 attackerHoldEffect;
     u8 attackerHoldEffectParam;
 
-    DebugPrintf("Inside CalculateBaseDamage\n");
-
     if (!powerOverride)
         gBattleMovePower = gBattleMoves[move].power;
     else

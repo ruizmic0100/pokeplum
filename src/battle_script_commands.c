@@ -1290,7 +1290,6 @@ static void Cmd_critcalc(void)
 static void Cmd_damagecalc(void)
 {
     u16 sideStatus = gSideStatuses[GET_BATTLER_SIDE(gBattlerTarget)];
-    DebugPrintf("\nInside Cmd_damagecalc\n");
     gBattleMoveDamage = CalculateBaseDamage(&gBattleMons[gBattlerAttacker], &gBattleMons[gBattlerTarget], gCurrentMove,
                                             sideStatus, gDynamicBasePower,
                                             gBattleStruct->dynamicMoveType, gBattlerAttacker, gBattlerTarget);
@@ -1301,14 +1300,12 @@ static void Cmd_damagecalc(void)
     if (gProtectStructs[gBattlerAttacker].helpingHand)
         gBattleMoveDamage = gBattleMoveDamage * 15 / 10;
 
-    DebugPrintf("\n %S Damage: %d\n", gBattleMons[gBattlerAttacker], gBattleMoveDamage);
     gBattlescriptCurrInstr++;
 }
 
 void AI_CalcDmg(u8 attacker, u8 defender)
 {
     u16 sideStatus = gSideStatuses[GET_BATTLER_SIDE(defender)];
-    DebugPrintf("\nInside AI_CalcDmg\n");
     gBattleMoveDamage = CalculateBaseDamage(&gBattleMons[attacker], &gBattleMons[defender], gCurrentMove,
                                             sideStatus, gDynamicBasePower,
                                             gBattleStruct->dynamicMoveType, attacker, defender);
@@ -1320,7 +1317,6 @@ void AI_CalcDmg(u8 attacker, u8 defender)
     if (gProtectStructs[attacker].helpingHand)
         gBattleMoveDamage = gBattleMoveDamage * 15 / 10;
 
-    DebugPrintf("\ngBattleMoveDamage: %d\n", gBattleMoveDamage);
 }
 
 static void ModulateDmgByType(u8 multiplier)
@@ -7868,7 +7864,7 @@ static void Cmd_metronome(void)
 
 static void Cmd_dmgtolevel(void)
 {
-    gBattleMoveDamage = gBattleMons[gBattlerAttacker].level;
+    gBattleMoveDamage = gBattleMons[gBattlerAttacker].level + 10; // Added + 10 here to make all EFFECT_LEVEL_DAMAGE moves a bit better. Looking at Nightshade for example.
     gBattlescriptCurrInstr++;
 }
 

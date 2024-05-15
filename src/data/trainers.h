@@ -7582,7 +7582,7 @@ const struct Trainer gTrainers[] = {
         .items = {},
         .doubleBattle = FALSE,
         .aiFlags = AI_SCRIPT_CHECK_BAD_MOVE,
-        .party = NO_ITEM_DEFAULT_MOVES(sParty_Clark),
+        .party = NO_ITEM_CUSTOM_MOVES(sParty_Clark),
     },
 
     [TRAINER_ERIC] =

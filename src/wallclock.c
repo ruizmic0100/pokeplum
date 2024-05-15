@@ -687,7 +687,6 @@ void CB2_StartWallClock(void)
 {
     u8 taskId;
     u8 spriteId;
-    DebugPrintf("Inside CB2_StartWallClock\n");
 
     LoadWallClockGraphics();
     LZ77UnCompVram(gWallClockStart_Tilemap, (u16 *)BG_SCREEN_ADDR(7));
